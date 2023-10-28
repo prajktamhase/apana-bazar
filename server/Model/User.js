@@ -30,9 +30,12 @@ const userSchema=new Schema({
         type:String,
        default:"Prefer not to say",
     },
+},
+{
     timestapms:true,
-});
+}
+);
 
 //Model
-const User =model("user",userSchema);
- export default User;
+const User =model("User",userSchema);
+ export default User

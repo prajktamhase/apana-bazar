@@ -2,8 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
-import User from "./Model/User";
-import Product from "./Model/Product";
+import User from "./Model/User.js";
+import Product from "./Model/Product.js";
 
 const app = express();
 app.use(express.json());
@@ -19,7 +19,7 @@ connectDB();
 //signup/post
 app.post("/signup", async (req, res) => {
     const { name, email, password, mobile, address, gender } = req.body;
-    const user = new UserActivation({
+    const user = new User({
         name,
         email,
         password,
@@ -46,25 +46,26 @@ app.post("/signup", async (req, res) => {
     }
 });
 
-//login/post
-app.post("/login", async (req, res) => {
+//login/get (access data fron signup)
+app.get("/login", async (req, res) => {
     const { email, password } = req.body;
-    if (!email || !password) {
-        return res.json({
-            success: false,
-            message: "Plese enter email and password"
-        })
-    }
 
-    const user = User.findOne({
-        email,
-        password
-    })
+    // if (!email || !password) {
+    //     return res.json({
+    //         success: false,
+    //         message: "Plese enter email and password"
+    //     })
+    // }
 
-    if (user) {
+    const finduser =await User.findOne({
+        email:email,
+        password:password
+    }).select('name mobile gender address')
+
+    if (finduser) {
         return res.json({
             success: true,
-            data: user,
+            data: finduser,
             message: "Liogin successfully"
         })
     }
@@ -76,7 +77,7 @@ app.post("/login", async (req, res) => {
     }
 })
 
-//GET products
+//GET all products
 app.get("/products", async (req, res) => {
     const products =
         await Product.find();
@@ -89,8 +90,8 @@ app.get("/products", async (req, res) => {
     });
 })
 
-//Post products
-app.post('product', async (req, res) => {
+//Post products (create product)
+app.post('/product', async (req, res) => {
     const {name, description, price, image, category, brand} = req.body;
 
     //product instance
@@ -120,10 +121,12 @@ app.post('product', async (req, res) => {
     }
 });
 
-//GET/products/:id
-app.get('products/:_id',async (req,res)=>{
-    const{_id}=req.params;
-    const product=await Product.findById(_id);
+//GET/product/:id
+app.get('/product/:_id',async (req,res)=>{
+
+    const{_id}=req.params
+    
+    const product=await Product.findOne({_id:_id})
     res.json({
         success:true,
         data:product,
@@ -132,7 +135,7 @@ app.get('products/:_id',async (req,res)=>{
 })
 
 //put/product/:id
-app.put('/product',async(req,res)=>{
+app.put('/product/:_id',async(req,res)=>{
     const {_id}=req.params;
     
     const {name,description, price,image,category,brand}=req.body;
@@ -146,7 +149,7 @@ app.put('/product',async(req,res)=>{
         brand
     }});
 
-    const updateProduct=await Product.findById(_id);
+    const updateProduct=await Product.findOne({_id:_id});
  
     res.json({
         success:true,
@@ -157,7 +160,7 @@ app.put('/product',async(req,res)=>{
 });
 
 //delete/product/:id
-app.delete('/product' ,async (req,res)=>{
+app.delete('/product/:_id' ,async (req,res)=>{
     const{_id}=req.params;
     const deleteProduct= await Product.deleteOne({_id:_id});
 
@@ -170,14 +173,14 @@ app.delete('/product' ,async (req,res)=>{
 })
 
 //get/products/search?query
-app.get('/products/search',async(req,res)=>{
-    const q = req.query;
+app.get('/product',async(req,res)=>{
+    const {q} = req.query;
 
-    const product=await Product.find({name:{$regex:q , $options:"i"}})
+    const searchProduct=await Product.find({name:{$regex:q , $options:"i"}})
 
     res.json({
         success:true,
-        data:deleteProduct,
+        data:searchProduct,
         message:"Product fetched successfully"
     })
 })

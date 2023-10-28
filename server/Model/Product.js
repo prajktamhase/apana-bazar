@@ -15,6 +15,7 @@ const productSchema = new Schema({
     },
     image: {
         type: String,
+        required:true
     },
     category: {
         type: String,
@@ -26,8 +27,9 @@ const productSchema = new Schema({
 },
  {
     timestamps: true,
-});
+}
+);
 
-const Product = model('product', productSchema);
+const Product = model('Product', productSchema);
 
 export default Product;
