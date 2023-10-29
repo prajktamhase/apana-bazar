@@ -2,12 +2,12 @@ import { Schema,model } from "mongoose";
 
  const orderSchema= new Schema({
     user:{
-        type: Schema.types.objectId,
+        type: Schema.Types.objectId,
         requirerd:true,
         ref:"User"
     },
     product:{
-        type:Schema.types.objectId,
+        type:Schema.Types.objectId,
         requirerd:true,
         ref:"Product"
     },
@@ -21,16 +21,19 @@ import { Schema,model } from "mongoose";
         requirerd:true
     },
 
-    deleveriCharges:{
+    deleveryCharges:{
         type:String,
         default:0
     },
 
     status:{
-     type:string,
-     default:pending
-    }
-
- })
+     type:String,
+     default:"pending"
+    },
+ },
+ {
+    timestamps:true
+});
 
  const Order = model ("Order",orderSchema)
+ export default Order
