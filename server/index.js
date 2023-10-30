@@ -34,16 +34,15 @@ app.post("/signup", async (req, res) => {
         res.json({
             success: true,
             data: saveUser,
-            message: "Signup Successfully"
+            message: "Signup Successfully",
 
         });
     }
-    catch (err) {
+    catch(e) {
         res.json({
-            success: true,
-            data: saveUser,
-            message: "e.message"
-        })
+            success: false,
+            message: e.message,
+        });
     }
 });
 
@@ -87,6 +86,7 @@ app.get("/products", async (req, res) => {
 
 //Post products (create product)
 app.post('/product', async (req, res) => {
+
     const { name, description, price, image, category, brand } = req.body;
 
     //product instance
@@ -106,8 +106,7 @@ app.post('/product', async (req, res) => {
             data: saveProduct,
             message: "Product created successfully"
         });
-    }
-    catch (e) {
+    }catch (e){
         res.json({
             success: false,
             message: e.message
@@ -185,8 +184,9 @@ app.get('/product', async (req, res) => {
 //order API
 //get/all orders/
 app.get('/orders',async (req,res)=>{
+    
 
-    const orders=await orders.find().populate("user product");
+    const orders=await Order.find().populate("user product");
 
     orders.forEach(order => {
         order.user.password=undefined;
@@ -202,18 +202,17 @@ app.get('/orders',async (req,res)=>{
 
 //post/order
 app.post('/order', async (req, res) => {
-
-    const { user, product, quantity, shippedAddress, deleveryCharges, status } = req.body;
-
+    const { user, product, quantity, shippingAddress, deleveryCharges, status } = req.body;
+    
     //create instance
-    const order = {
+    const order = new Order ({
         user,
         product,
         quantity,
-        shippedAddress,
+        shippingAddress,
         deleveryCharges,
         status
-    }
+    })
 
     try {
         const saveOrder = await order.save();
@@ -226,18 +225,19 @@ app.post('/order', async (req, res) => {
     catch(e){
         res.json({
             success: false,
-            message: e.message
+            message: e.message,
         });
-
     }
 });
 
 //get/user/order/id
-app.get('/order/:_id', async (req, res) => {
-  const {id}=req.params;
-  const order = await Order.findById(_id).populate("user product");
+app.get('/order/:id', async (req, res) => {
+
+  const {id} = req.params;
+
+  const order = await Order.findOne({_id:id}).populate("user product");
  
-order.user.password=undefined;
+   order.user.password=undefined;
 
     res.json({
         success: true,
@@ -246,10 +246,10 @@ order.user.password=undefined;
     });
 })
 
-//get/all orders from user/user/:id
-app.get('/orders', async (req, res) => {
+// //get/all orders from user/user/:id
+app.get('/orders/:_id', async (req, res) => {
     const order =
-        await Order.find();
+        await Order.find().populate("user product");
     res.json({
         success: true,
         data: order,
@@ -257,29 +257,29 @@ app.get('/orders', async (req, res) => {
     });
 })
 
-//get/orders/user/:id
-app.get('/orders/user/:_id' ,async (req,res)=>{
+// //get/orders/user/:id
+// app.get('/orders/user/:_id' ,async (req,res)=>{
 
-    const {_id}=req.params;
+//     const {_id}=req.params;
 
-    const orders =  await Order.find({user:_id}).populate("user product");
+//     const orders =  await Order.find({user:_id}).populate("user product");
 
-    res.json({
-        success: true,
-        data: orders,
-        message: "Order fetched successfully"
-    });
-})
+//     res.json({
+//         success: true,
+//         data: orders,
+//         message: "Order fetched successfully"
+//     });
+// })
 
-//patch/order/status/:id
-app.patch('/order/:_id' ,async (req,res)=>{
+// //patch/order/status/:id
+app.patch('/order/:id' ,async (req,res)=>{
 
-    const {_id} =req.params;
+    const {id} =req.params;
     const {status}=req.body;
 
-   await Order.updateOne({_id:_id},{$set:{status:status}})
+   await Order.updateOne({_id:id},{$set:{status:status}})
 
-    req.response({
+    res.json({
         success:true,
         message:"Order updated successfully"
     })

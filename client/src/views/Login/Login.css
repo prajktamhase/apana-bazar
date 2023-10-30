@@ -1,0 +1,30 @@
+.form-design{
+ 
+    width: fit-content;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px 2px black;
+    margin: 100px auto;
+    padding: 30px 90px;
+
+}
+body{
+     /* background-repeat: no-repeat; */
+     mask-repeat: no-repeat;
+}
+.color{
+    color: white;
+}
+.box{
+    padding: 10px 10px;
+    margin: 10px;
+    width:290px;
+    margin-bottom:15px;
+}
+.signup-btn{
+    width: 250px;
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    margin: 20px 25px;
+}
