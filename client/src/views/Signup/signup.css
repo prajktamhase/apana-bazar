@@ -1,26 +1,31 @@
-.form-design{
-    background-image: url("sign.png");
+.form-design{ 
     width: fit-content;
     border-radius: 10px;
     box-shadow: 0 1px 5px 2px black;
-    margin: 100px auto;
-    padding: 30px 90px;
+    margin: 30px auto;
+    padding: 10px 90px;
+ 
 }
-/* body{
-   background-color: rgb(219, 174, 174);
-} */
-.color{
-    color: white;
+
+.background{
+    background-size: cover;
+     background-image: linear-gradient(rgba(131, 123, 245, 0.9), rgba(0, 0, 0, 0.8)),
+    url("sign.png");  
+    opacity: 1.9;
+    width: 100%;
+    height: 100vh;     
 }
+
 .box{
     padding: 10px 10px;
     margin: 10px;
     width:290px;
     margin-bottom:15px;
 }
+
 .signup-btn{
     width: 250px;
-    padding: 10px 10px;
+    padding: 20px 10px;
     border-radius: 10px;
     background-color: white;
     color: black;

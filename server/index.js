@@ -12,7 +12,7 @@ app.use(express.json());
 const connectDB = async () => {
     const conn = await mongoose.connect(process.env.MONGODB_URI);
     if (conn) {
-        console.log("MongoDB start")
+        console.log("MongoDB start...💖")
     }
 };
 connectDB();
@@ -28,9 +28,9 @@ app.post("/signup", async (req, res) => {
         address,
         gender
     });
+
     try {
         const saveUser = await user.save();
-
         res.json({
             success: true,
             data: saveUser,
@@ -46,8 +46,8 @@ app.post("/signup", async (req, res) => {
     }
 });
 
-//login/get (access data fron signup)
-app.get("/login", async (req, res) => {
+//login/post (access data fron signup)
+app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     const finduser = await User.findOne({
@@ -59,7 +59,7 @@ app.get("/login", async (req, res) => {
         return res.json({
             success: true,
             data: finduser,
-            message: "Liogin successfully"
+            message: "Login successfully"
         })
     }
     else {

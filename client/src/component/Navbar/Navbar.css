@@ -1,0 +1,19 @@
+.design{
+    width: 100%;
+    background-color: rgb(107, 106, 106);
+    padding: 30px 15px;
+    color: white;
+}
+.font{
+    font-size: 30px;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+.container{
+    margin: 0px 35px;
+    text-decoration: none;
+    color: white;
+    font-size: 27px;
+}
