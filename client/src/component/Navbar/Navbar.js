@@ -17,10 +17,10 @@ function Navbar() {
                     <Link to="/" className="font design">Apana Bazar🧺</Link>
                 </div >
 
-                <div >
+                <div className="flex ">
                     <Link to="/login" className="container design">Login</Link>
                     <Link to="/signup" className="container design"> Signup</Link>
-                    <Link to="/order" className="container design">My Order</Link>
+                    <Link to="/order" className="container design">MyOrder</Link>
                 </div>
 
                 <div className="container ">

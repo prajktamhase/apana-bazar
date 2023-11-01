@@ -4,7 +4,8 @@ import "./signup.css";
 import image from "./shop.png"
 import React from "react-dom/client";
 import { Link } from "react-router-dom";
-import Navbar from "./../../component/Navbar/Navbar"
+import Navbar from "./../../component/Navbar/Navbar";
+
 
 function Signup() {
   const [name, setName] = useState('');
@@ -26,7 +27,6 @@ function Signup() {
       mobile,
       address,
       gender
-
     });
 
     if (response?.data?.success) {
@@ -46,10 +46,10 @@ function Signup() {
       window.location.href = ("/")
     }
   }, [])
+
   return (
     <>
-      <Navbar />
-     
+      <Navbar/>     
       <div className="flex-container sign-form-design">
       <div>
           <img src={image}  className="sign-img"/>
