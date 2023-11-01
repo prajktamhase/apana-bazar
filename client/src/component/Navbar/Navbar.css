@@ -1,12 +1,16 @@
 .design{
     width: 100%;
-    background-color: rgb(107, 106, 106);
+    background-color:rgb(3, 15, 69);
     padding: 30px 15px;
     color: white;
 }
+.design:hover{
+ color: gold;
+
+}
 .font{
     font-size: 30px;
-}
+text-decoration: none;}
 .flex{
     display: flex;
     justify-content: space-between;

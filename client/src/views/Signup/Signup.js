@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import "./signup.css"
+import "./signup.css";
+import image from "./shop.png"
 import React from "react-dom/client";
+import { Link } from "react-router-dom";
 import Navbar from "./../../component/Navbar/Navbar"
 
 function Signup() {
@@ -36,18 +38,29 @@ function Signup() {
       alert(response?.data?.message);
     }
   })
+  useEffect(() => {
+    const userReadLocalstorage = JSON.parse(localStorage.getItem("user"), '{}');
+
+    if (userReadLocalstorage?.email) {
+      alert("You are already logged in")
+      window.location.href = ("/")
+    }
+  }, [])
   return (
     <>
       <Navbar />
-      <div className="background">
-  <div>
-  <div >
+     
+      <div className="flex-container sign-form-design">
+      <div>
+          <img src={image}  className="sign-img"/>
+        </div>
+       
+        <div className=" content">
+       
+          
           <form>
-           
-          <h1 className="text-center color">SignUp</h1>
-          <div className="form-design">
-         
-          <div>
+          <h1 className="text-center color">SignUp</h1><br />
+            <div>
               <label htmlFor="name" className="color">Name: </label><br />
               <input type="text" id="name"
                 value={name}
@@ -116,7 +129,6 @@ function Signup() {
               />
               <label htmlFor="female" className="color">Female</label>
 
-
               <input type="radio"
                 id="male"
                 name="gender"
@@ -130,17 +142,18 @@ function Signup() {
             </div>
 
             <button type="button"
-              className="signup-btn"
+              className="btn"
               onClick={signup}
             >Signup</button>
-          </div>
+
+            <p>
+              <Link to="/login" className="link-text">Already have an account?</Link>
+            </p>
           </form>
         </div>
-  </div>
-       
       </div>
+   
     </>
   )
 }
-
 export default Signup

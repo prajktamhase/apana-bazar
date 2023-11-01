@@ -1,34 +1,33 @@
+import { useEffect, useState } from "react"
 import "./Navbar.css"
 import { Link } from "react-router-dom"
-function Navbar(){
-      
 
+function Navbar() {
+    const [user, setUser] = useState({});
 
-    return(
+    useEffect(() => {
+        const storageUser = JSON.parse(localStorage.getItem("user") || '{}');
+        setUser(storageUser);
+    }, [])
+
+    return (
         <>
-        <div className="design flex">
-            <div>
-                <span className="font">Apana Bazar🧺</span>
+            <div className="design flex">
+                <div>
+                    <Link to="/" className="font design">Apana Bazar🧺</Link>
+                </div >
 
-            </div >
+                <div >
+                    <Link to="/login" className="container design">Login</Link>
+                    <Link to="/signup" className="container design"> Signup</Link>
+                    <Link to="/order" className="container design">My Order</Link>
+                </div>
 
-        
-            <div >
-            <Link to="/login" className="container">Login</Link>
-            <Link to="/signup" className="container"> Signup</Link>
-            <Link to="/order" className="container">My Order</Link>
-            
+                <div className="container ">
+                    Hello,{user.name}
+                </div>
             </div>
-
-
-            <div className="container">
-Hello user
-            </div>
-
-        </div>
-
         </>
-
     )
 }
 

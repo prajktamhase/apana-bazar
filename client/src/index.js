@@ -2,6 +2,7 @@ import  ReactDOM from "react-dom/client";
 import Signup from "./views/Signup/Signup";
 import Login from "./views/Login/Login";
 import MyOrder from "./views/MyOrder/Order";
+import Home from "./views/Home/Home";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -13,7 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const router = createBrowserRouter([
     {
       path: "/",
-      element: <div>Hello world!</div>,
+      element: <Home/>,
     },
     {
         path: "/signup",
