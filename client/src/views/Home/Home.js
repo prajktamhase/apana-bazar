@@ -1,28 +1,46 @@
 import "./Home.css"
 import Navbar from "./../../component/Navbar/Navbar"
 import { useEffect, useState } from "react"
+import axios from "axios";
 import ProductCard from "./../../component/ProductCard/ProductCard"
 
 function Home() {
-    
-    const [product, setProduct] = useState('')
+
+    const [products, setProduct] = useState([])
+
+    const loadProduct = async () => {
+        try {
+            const response = await axios .get("products");
+            setProduct(response?.data?.data)
+        }
+        catch (e) {
+            console.log(e)
+            alert("Error Loading product")
+        }
+    };
 
     useEffect(() => {
-        const loadProduct = JSON.parse(localStorage.getItem("user") || '{}');
-        setProduct(loadProduct);
+        loadProduct()
     }, []);
 
     return (
         <>
             <Navbar />
-            {/* <div>
+            <div className="container-design">
                 {
-                    product.map((productcard, index) => {
-                        const { name, description, price, image, category, brand } = productcard;
+                    products?.map((product, index) => {
+                        const {_id, name, description, price, image } = product;
+
+                        return (<ProductCard 
+                            key={index}
+                            name={name}
+                            description={description}
+                            price={price}
+                            image={image} />
+                        )
                     })
-                    // <ProductCard  key={index} name={name} description={description} price={price} image={image} />
                 }
-            </div> */}
+            </div>
         </>
     )
 }
