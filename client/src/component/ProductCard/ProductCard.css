@@ -1,8 +1,8 @@
 .product-card-design{
     width: 500px;
-    height: 700px;
+    height:fit-content;
     padding: 20px 15px;
-    margin: 5px 10px;
+    margin: 25px 10px;
     background-color: white;
 }
 .img-card{
@@ -30,12 +30,12 @@
 }
 .btn-card{
     text-decoration: none;
-    width: 380px;
+    width: 350px;
     background-color: rgb(22, 4, 59);
     color: white;  
     padding: 15px 130px;
     border-radius: 10px;
-    margin: 30px 60px;
+    margin: 50px 60px;
     font-size: 25px;   
    
 }

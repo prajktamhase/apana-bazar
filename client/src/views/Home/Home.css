@@ -5,3 +5,11 @@
     flex-wrap: wrap;
     
 }
+.search-bar{
+    width: 300px;
+    display: block;
+    font-size: 30px;
+    margin: 20px auto;
+    border-radius: 40px;
+    padding: 5px 20px;
+}

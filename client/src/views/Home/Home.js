@@ -3,10 +3,21 @@ import Navbar from "./../../component/Navbar/Navbar"
 import { useEffect, useState } from "react"
 import axios from "axios";
 import ProductCard from "./../../component/ProductCard/ProductCard"
+import Footer from "./../../component/Footer/Footer"
 
 function Home() {
 
     const [products, setProduct] = useState([])
+    const [search , setSearch]=useState('')
+
+    const searchProduct=async()=>{
+        if(search==""){
+            loadProduct();
+            return;
+        }
+        const response=await axios.get(`products/search?q=$
+        {search}`)
+    }
 
     const loadProduct = async () => {
         try {
@@ -26,6 +37,13 @@ function Home() {
     return (
         <>
             <Navbar />
+            <input type="text"
+                value={search}
+                className="search-bar"
+                onChange={(e)=>{
+                    setSearch(e.target.value)
+                }}/>
+
             <div className="container-design">
                 {
                     products?.map((product, index) => {
@@ -36,11 +54,13 @@ function Home() {
                             name={name}
                             description={description}
                             price={price}
-                            image={image} />
+                            image={image} 
+                            id={_id}/>
                         )
                     })
                 }
             </div>
+            <Footer/>
         </>
     )
 }

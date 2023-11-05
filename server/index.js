@@ -277,6 +277,29 @@ app.patch('/order/:id' ,async (req,res)=>{
     const {id} =req.params;
     const {status}=req.body;
 
+    const STATUS_PRIORITY_MAP={
+        pending:0,
+        shipped:1,
+        delivered:2,
+        returned:3,
+        canceled:4,
+        rejected:5
+
+    }
+
+const order= await order.findById(id);
+const currentStatus=order.status;
+
+const currentPriority=STATUS_PRIORITY_MAP[currentStatus];
+const newPriority=STATUS_PRIORITY_MAP[status];
+
+if(currentPriority >newPriority){
+    return res.json({
+        success:false,
+        message:`${status} cannot be send once order is ${currentPriority}`
+    });
+}
+
    await Order.updateOne({_id:id},{$set:{status:status}})
 
     res.json({

@@ -1,0 +1,38 @@
+.order-container{
+    padding: 10px 50px;
+    
+}
+.ordercard{
+    background-color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    box-shadow: 0 0 4px 0 black;
+    border-radius: 10px;
+    position: relative;
+}
+.order-status{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    font-size: 20px;
+    color:white;
+    text-align: center;
+    padding: 5px 40px;
+    margin: 10px;
+
+}
+.product-link{
+    text-decoration: none;
+    color:black;   
+}
+.badge-dander{
+background-color: red;
+}
+.badge-warning{
+    background-color: orange;
+
+}
+.badge-success{
+    background-color: green;
+
+}
