@@ -5,27 +5,55 @@ import { Link } from 'react-router-dom';
 // import twitter from "./twitter.png"
 // import In from "./in.png";
 
-const Footer = () => {
+function Footer() {
+
+
     return (
         <>
-        <div className="design">
-        <h1 className='text-center'>Apna Bazar</h1><br />
-                {/* <div className="flex">
+            <div className="design">
+            <h1 className='heading text-center'>Apna Bazar</h1><br />
+               
+                <div class="container-design">
+              
                     <div>
-                        <h1>Created by @PRAJKTA MHASE</h1>
+                 
+                        <span class="fontsize">◼ Everyone loves a great deal.<br />
+                            ◼ We’re here to serve only the best products for you.<br />
+                            ◼ Your needs in just one place.<br />
+                            ◼ Look no further! We got everything for you.<br />
+                            ◼ Low low prices await!<br />
+                        </span>
+
                     </div>
-                    <div className=''>
-                        <h2 className=''>Quick Links</h2><br/>
-                        <Link to="/" className='link-text color'>Home</Link><br />
-                        <Link to="/blog" className='link-text color'>Blog</Link><br />
-                        <Link to="/contact" className='link-text color'>Contact</Link><br />
-                        <Link to="/about" className='link-text color'>About</Link><br />
-                        <Link to="/login" className='link-text color'>Login</Link><br />
+
+                    <div>
+                        <h3 className='fontsize'>✔Quick Links</h3><br />
+                        <ul class="list-links">
+                            <li><a href="./" className='color link-footer fontsize'>Home</a></li>
+                            <li><a href="./login" className='color link-footer fontsize'>login</a></li>
+                            <li><a href="./signup" className='color link-footer fontsize'>Signup</a></li>
+                            <li><a href="./order" className='color link-footer fontsize'>My Order</a></li>
+
+
+                        </ul>
                     </div>
-                  
-                </div> */}
+
+                    <div >
+                        <h3 className='fontsize'> Address</h3><br />
+                        <span class="address fontsize"> 404, Laxmi Heights,
+                            Above Lotus <br /><span class="multi">Multispeciality Hospital,</span> <br /><span class="multi">Manjari
+                                Farm,</span><br /><span class="multi"> Pune-412307.</span><br />
+                            <span class="multi">Mobile No: 8805803087</span></span>
+
+                    </div>
+                </div>
+              
+
             </div>
-        </>
-    )
+
+
+            </>
+            )
 }
-export default Footer
+
+            export default Footer

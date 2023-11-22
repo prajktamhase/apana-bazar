@@ -19,6 +19,16 @@ body{
     margin-left: 200px;
 }
 
+.link-footer{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+
+
+}
+.link-footer:hover{
+    color: gold;
+}
 .link{
     text-decoration: none;
     color: white;
@@ -58,4 +68,7 @@ body{
 }
 .color{
     color: white;
+}
+.heading{
+    font-size: 40px;
 }

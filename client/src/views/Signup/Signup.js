@@ -116,7 +116,7 @@ function Signup() {
             </div>
 
             <div>
-              <h4 className="color">Gender:</h4>
+              <h4 className="">Gender:</h4>
 
               <input type="radio"
                 id="female"
@@ -127,18 +127,19 @@ function Signup() {
                   setGender("female");
                 }}
               />
-              <label htmlFor="female" className="color">Female</label>
+              <label htmlFor="female" className="">Female</label>
+              <br/>
 
               <input type="radio"
                 id="male"
                 name="gender"
-                className="color"
+                
                 checked={gender === 'male'}
                 onClick={() => {
                   setGender("male");
                 }}
               />
-              <label htmlFor="male" className="color">Male</label>
+              <label htmlFor="male" className="">Male</label>
             </div>
 
             <button type="button"

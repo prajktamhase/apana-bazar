@@ -15,9 +15,14 @@ function Home() {
             loadProduct();
             return;
         }
-        const response=await axios.get(`products/search?q=$
-        {search}`)
+        const response=await axios.get(`product?q=${search}`)
+        setProduct(response?.data?.data);
     }
+
+    
+    useEffect(() => {
+        searchProduct()
+    }, [search]);
 
     const loadProduct = async () => {
         try {
@@ -39,6 +44,7 @@ function Home() {
             <Navbar />
             <input type="text"
                 value={search}
+                placeholder="Search"
                 className="search-bar"
                 onChange={(e)=>{
                     setSearch(e.target.value)

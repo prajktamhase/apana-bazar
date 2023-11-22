@@ -16,13 +16,14 @@ function MyOrder() {
 
     const loadOrders = (async () => {
         const userId = user._id;
+        
         if (!userId) {
             return;
             // alert()
             // window.location.href("/login")
         }
 
-        const response = await axios.get(`/order/${user}`)
+        const response = await axios.get(`/orders/user/${user._id}`)
         setOrder(response?.data?.data);
     })
 
