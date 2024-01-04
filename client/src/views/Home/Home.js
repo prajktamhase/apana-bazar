@@ -11,7 +11,7 @@ function Home() {
     const [search , setSearch]=useState('')
 
     const searchProduct=async()=>{
-        if(search==""){
+        if(search === ""){
             loadProduct();
             return;
         }
@@ -25,8 +25,9 @@ function Home() {
     }, [search]);
 
     const loadProduct = async () => {
+        
         try {
-            const response = await axios .get("products");
+            const response = await axios .get("/products");
             setProduct(response?.data?.data)
         }
         catch (e) {
@@ -42,6 +43,8 @@ function Home() {
     return (
         <>
             <Navbar />
+            <div className="background"><img src =""/>
+            <h1 className="bazar">Apna Bazar🧺</h1></div>
             <input type="text"
                 value={search}
                 placeholder="Search"

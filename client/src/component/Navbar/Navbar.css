@@ -5,8 +5,15 @@
     color: white;
 } */
 
-.design:hover {
+.design-gold:hover {
     color: gold;
+}
+.log-btn{
+    border-bottom: 5px solid gold;
+    margin: 5px;
+    padding: 5px 10px;
+    color: aquamarine;
+    cursor: pointer;
 }
 
 .font {

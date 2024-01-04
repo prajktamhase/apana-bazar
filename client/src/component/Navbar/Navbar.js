@@ -12,15 +12,15 @@ function Navbar() {
 
     return (
         <>
-            <div className="design flex">
+            <div className="design-gold flex">
                 <div>
-                    <Link to="/" className="font design">Apana Bazar🧺</Link>
+                    <Link to="/" className="font design-gold">Apana Bazar🧺</Link>
                 </div >
 
                 <div className="flex ">
-                    <Link to="/login" className="container design">Login</Link>
-                    <Link to="/signup" className="container design"> Signup</Link>
-                    <Link to="/order" className="container design">MyOrder</Link>
+                    <Link to="/login" className="container design-gold">Login</Link>
+                    <Link to="/signup" className="container design-gold"> Signup</Link>
+                    <Link to="/order" className="container design-gold">MyOrder</Link>
                 </div>
 
                 <div className="container ">
@@ -32,7 +32,7 @@ function Navbar() {
                                 localStorage.removeItem("user");
                                 window.location.href = "/login";
                             })}>
-                            Logout
+                           <span className="log-btn"> Logout</span>
                         </span>) : null
                     }
                 </div>

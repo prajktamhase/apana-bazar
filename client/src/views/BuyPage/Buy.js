@@ -13,6 +13,7 @@ function BuyPage({ _id,name, description, price, image, category, brand }) {
     const [product, setProduct] = useState({})
     const [quantity, setQuantity] = useState(1);
     const [shippingAddress, setShippingAddress] = useState('');
+    const [deliveryCharge, setDeliveryCharge] = useState();
 
     const loadDetails = async () => {
 
@@ -37,6 +38,36 @@ function BuyPage({ _id,name, description, price, image, category, brand }) {
         }
         setQuantity(quantity - 1)
     }
+    
+    
+  const placeOrder = async () => {
+
+
+    const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+
+
+    const orderDetails = {
+      user: currentUser?._id,
+      product: product?._id,
+      quantity: quantity,
+      shippingAddress: shippingAddress,
+    //   deliveryCharges: deliveryCharge,
+    }
+
+
+    const response = await axios.post('/order', orderDetails);
+
+
+    alert(response?.data?.message);
+    if (response?.data?.success) {
+      window.location.href = '/order'
+    }
+  }
+
+
+  useEffect(() => {
+    loadDetails();
+  }, []);
   
     return (
         <>
@@ -73,8 +104,22 @@ function BuyPage({ _id,name, description, price, image, category, brand }) {
                         setShippingAddress(e.target.value)
                     }}
                     className=" addressBox" />
+                      <div>
+              <input type='radio' className='radio-btn-charges' value={deliveryCharge} name='deliveryCharge' onClick={(e) => {
+                if (e.target.checked) {
+                  setDeliveryCharge(40)
+                }
+              }} />Regular Delivery Charges
 
-                <Link to="/order/:_id" className="btn-card1">
+              <input type='radio' className='radio-btn-charges' value={deliveryCharge}
+                name='deliveryCharge' onClick={(e) => {
+                  if (e.target.checked) {
+                    setDeliveryCharge(100)
+                  }
+                }} />Fast Delivery Charges
+            </div>
+
+                <Link to="/order/:_id" className="btn-card1" onClick={placeOrder}>
                     Order
                 </Link>
             </div>

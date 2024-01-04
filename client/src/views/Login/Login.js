@@ -4,6 +4,7 @@ import "./Login.css"
 import React from "react-dom/client";
 import { Link } from "react-router-dom";
 import Navbar from "./../../component/Navbar/Navbar"
+import Footer from "./../../component/Footer/Footer"
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -79,7 +80,9 @@ useEffect(() => {
           </form>
         </div>
       </div>
+      <Footer/>
     </>
+   
   )
 }
 

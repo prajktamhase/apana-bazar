@@ -1,13 +1,15 @@
 import express from "express";
 import mongoose from "mongoose";
-import dotenv, { populate } from "dotenv";
+import dotenv, {populate} from "dotenv";
 dotenv.config();
 import User from "./Model/User.js";
 import Product from "./Model/Product.js";
-import Order from "./Model/Order.js"
+import Order from "./Model/Order.js";
+import path from 'path';
 
 const app = express();
 app.use(express.json());
+const __dirname=path.resolve();
 
 const connectDB = async () => {
     const conn = await mongoose.connect(process.env.MONGODB_URI);
@@ -98,7 +100,6 @@ app.post('/product', async (req, res) => {
         category,
         brand
     })
-
     try {
         const saveProduct = await product.save();
         res.json({
@@ -230,48 +231,25 @@ app.post('/order', async (req, res) => {
     }
 });
 
-//get/user/order/id
-app.get('/order/:id', async (req, res) => {
 
-  const {id} = req.params;
+//get/orders/user/:id
+app.get('/orders/user/:_id' ,async (req,res)=>{
 
-  const order = await Order.findOne({_id:id}).populate("user product");
- 
-   order.user.password=undefined;
+    const {_id}=req.params;
+
+    const orders =  await Order.find({user:_id}).populate("user product");
+    orders.forEach((order)=>{
+        order.user.password=undefined;
+    })
 
     res.json({
         success: true,
-        data: order,
+        data: orders,
         message: "Order fetched successfully"
     });
 })
 
-// //get/all orders from user/user/:id
-app.get('/orders/:_id', async (req, res) => {
-    const order =
-        await Order.find().populate("user product");
-    res.json({
-        success: true,
-        data: order,
-        message: "Product fetched successfully"
-    });
-})
-
-// //get/orders/user/:id
-// app.get('/orders/user/:_id' ,async (req,res)=>{
-
-//     const {_id}=req.params;
-
-//     const orders =  await Order.find({user:_id}).populate("user product");
-
-//     res.json({
-//         success: true,
-//         data: orders,
-//         message: "Order fetched successfully"
-//     });
-// })
-
-// //patch/order/status/:id
+//patch/order/status/:id
 app.patch('/order/:id' ,async (req,res)=>{
 
     const {id} =req.params;
@@ -307,6 +285,14 @@ if(currentPriority >newPriority){
         message:"Order updated successfully"
     })
 })
+
+if(process.env.NODE_ENV==="production"){
+    app.use(express.static(path.join(__dirname,'..','client','build')));
+}
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
+  });
 
 const PORT = process.env.PORT || 5000;
 
